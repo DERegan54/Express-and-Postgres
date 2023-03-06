@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS companies;
 CREATE TABLE companies (
     code text PRIMARY KEY,
     name text NOT NULL UNIQUE,
-    ind_code text REFERENCES industries (code),
     description text
 );
 
@@ -35,13 +34,12 @@ CREATE TABLE invoices (
     CONSTRAINT invoices_amt_check CHECK ((amt > (0)::double precision))
 );
 
+-- Two primary keys from foreign keys will make it so there are no duplicates
 CREATE TABLE companies_industries (
-    id serial PRIMARY KEY,
-    comp_code text REFERENCES companies (code),
-    ind_code text REFERENCES industries (code)
+  comp_code text REFERENCES companies,
+  ind_code text REFERENCES industries,
+  PRIMARY KEY(comp_code, ind_code)
 );
-
-
 --------------------------------------------------------------
 -- Add data
 --------------------------------------------------------------
@@ -73,6 +71,7 @@ INSERT INTO industries (code, industry)
 
 INSERT INTO companies_industries (comp_code, ind_code)
   VALUES ('apple', 'electronics'),
+         ('apple', 'ecom'),
          ('ibm', 'electronics'),
          ('aws', 'it'),
          ('spot', 'audio'),

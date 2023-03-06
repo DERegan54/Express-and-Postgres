@@ -4,7 +4,7 @@ const ExpressError = require("./expressError")
 const compRoutes = require("./routes/companies");
 const invRoutes = require("./routes/invoices");
 const indRoutes = require("./routes/industries");
-const compIndRoutes = require("./routes/companies_industries");
+// const compIndRoutes = require("./routes/companies_industries");
 const app = express();
 
 // Parse request bodies for JSON
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/companies", compRoutes);
 app.use("/invoices", invRoutes);
 app.use ("/industries", indRoutes);
-app.use("/companies_industries", compIndRoutes);
+// app.use("/companies_industries", compIndRoutes);
 
 /** 404 handler */
 
